@@ -34,6 +34,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -65,6 +66,12 @@ class MainActivity : ComponentActivity() {
 fun TampilLayout (
     modifier: Modifier = Modifier) {
     Card (modifier = modifier, elevation =  CardDefaults.cardElevation(defaultElevation = 5.dp)){
+        Text(
+            text = "Create Your Account",
+            fontSize = 20.sp,
+            fontWeight = FontWeight.Bold,
+            modifier = Modifier.align(Alignment.CenterHorizontally)
+        )
         Column(verticalArrangement = Arrangement.spacedBy(10.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
             modifier = Modifier.padding(20.dp)) {
@@ -79,6 +86,7 @@ fun TampilForm(cobaViewModel: CobaViewModel = viewModel()) {
 
     var textNama by remember { mutableStateOf("") }
     var textTlp by remember { mutableStateOf("") }
+    var textEmail by remember { mutableStateOf("") }
     var textAlamat by remember { mutableStateOf("") }
 
     val context = LocalContext.current
@@ -91,7 +99,7 @@ fun TampilForm(cobaViewModel: CobaViewModel = viewModel()) {
         singleLine = true,
         shape = MaterialTheme.shapes.large,
         modifier = Modifier.fillMaxWidth(),
-        label = { Text(text = "Nama Lengkap") },
+        label = { Text(text = "Username") },
         onValueChange = {
             textNama = it
         }
@@ -102,7 +110,18 @@ fun TampilForm(cobaViewModel: CobaViewModel = viewModel()) {
         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
         shape = MaterialTheme.shapes.large,
         modifier = Modifier.fillMaxWidth(),
-        label = { Text(text = "Telpon") },
+        label = { Text(text = "Telepon") },
+        onValueChange = {
+            textTlp = it
+        }
+    )
+    OutlinedTextField(
+        value = textEmail,
+        singleLine = true,
+        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+        shape = MaterialTheme.shapes.large,
+        modifier = Modifier.fillMaxWidth(),
+        label = { Text(text = "Email") },
         onValueChange = {
             textTlp = it
         }
@@ -129,6 +148,7 @@ fun TampilForm(cobaViewModel: CobaViewModel = viewModel()) {
     {
         Text(text = stringResource(R.string.submit),
             fontSize = 16.sp)
+
     }
     Spacer(modifier = Modifier.height(100.dp))
     TextHasil(
@@ -142,7 +162,7 @@ fun TampilForm(cobaViewModel: CobaViewModel = viewModel()) {
 fun SelectJK(options : List<String>,onSelectionChanged: (String) -> Unit = {}) {
     var selectedValue by rememberSaveable { mutableStateOf("")}
 
-    Column (modifier = Modifier.padding(16.dp)){
+    Row (modifier = Modifier.padding(16.dp)){
         options.forEach{item ->
             Row(
                 modifier = Modifier.selectable(selected = selectedValue == item, onClick = {
@@ -167,10 +187,10 @@ fun TextHasil(namanya: String, telponnya: String, jenisnya: String, alamatnya: S
     ElevatedCard(
         elevation = CardDefaults.cardElevation(
             defaultElevation = 6.dp), modifier = Modifier.fillMaxWidth()) {
-        Text(text = "Nama : " + namanya, modifier = Modifier.padding(horizontal = 10.dp, vertical = 4.dp))
-        Text(text = "Telepon : " + telponnya, modifier = Modifier.padding(horizontal = 10.dp, vertical = 5.dp))
-        Text(text = "Jenis kelamin " + jenisnya, modifier = Modifier.padding(horizontal = 10.dp, vertical = 5.dp))
-        Text(text = "Alamat " + alamatnya, modifier = Modifier.padding(horizontal = 10.dp, vertical = 5.dp))
+        Text(text = "Jenis Kelamin: " + namanya, modifier = Modifier.padding(horizontal = 10.dp, vertical = 4.dp))
+        Text(text = "Status : " + telponnya, modifier = Modifier.padding(horizontal = 10.dp, vertical = 5.dp))
+        Text(text = "Alamat : " + jenisnya, modifier = Modifier.padding(horizontal = 10.dp, vertical = 5.dp))
+        Text(text = "Email : " + alamatnya, modifier = Modifier.padding(horizontal = 10.dp, vertical = 5.dp))
     }
 }
 
