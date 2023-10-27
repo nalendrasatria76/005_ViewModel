@@ -110,7 +110,7 @@ fun TampilForm(cobaViewModel: CobaViewModel = viewModel()) {
         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
         shape = MaterialTheme.shapes.large,
         modifier = Modifier.fillMaxWidth(),
-        label = { Text(text = "Telepon") },
+        label = { Text(text = "Telepoon") },
         onValueChange = {
             textTlp = it
         }
